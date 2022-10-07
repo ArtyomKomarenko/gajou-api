@@ -27,9 +27,9 @@ class BaseInterceptor(UnaryUnaryClientInterceptor, UnaryStreamClientInterceptor,
 
     def _log_request(self, target, method, data):
         body = MessageToDict(data)
-        self.logger.info(f'gRPC {target} {method} {body}')
+        self.logger.info(f'gRPC {target}{method} {body}')
         if self.allure:
-            self.allure.attach(f'{target} {method} {body}', 'Request', self.allure.attachment_type.TEXT)
+            self.allure.attach(f'{target}{method} {body}', 'Request', self.allure.attachment_type.TEXT)
 
     def _log_response(self, response):
         body = MessageToDict(response.result())

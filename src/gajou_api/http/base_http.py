@@ -68,10 +68,7 @@ class BaseHTTP:
         if kwargs.get('data'):
             request_message += f'\nData: {kwargs.get("data")}'
         if kwargs.get('files'):
-            if isinstance(kwargs.get('files'), dict):  # single file uploading
-                request_message += f'\nFiles: {kwargs.get("files")["file"][0]}'
-            elif isinstance(kwargs.get('files'), list):  # multiple files uploading
-                request_message += f'\nFiles: {[f[1][0] for f in kwargs.get("files")]}'
+            request_message += f'\nFiles: {kwargs.get("files")}'  # dirty but universal way to log all files
         self._attach_to_allure(request_message.replace('\n', '\n\n'), 'Request')
         self.log.info(request_message)
 
